@@ -6,8 +6,6 @@ use sycamore_futures::spawn_local_scoped;
 extern "C" {
     // Use `js_namespace` here to bind `console.log(..)` instead of just
     // `log(..)`
-    #[wasm_bindgen(js_namespace = console)]
-    fn log(s: &str);
 
     #[wasm_bindgen]
     fn download(blob: Vec<u8>,name: &str);
@@ -260,7 +258,6 @@ fn main() {
                                                     Ok(r) => namen.set(r.json().await.ok().unwrap_or(namen.get().to_vec())),
                                                     Err(_) => {}
                                                 }
-                                                log(format!("{:?}",namen.get().to_vec()).as_str());
                                             });
                                         });
                                         view!(cx,
